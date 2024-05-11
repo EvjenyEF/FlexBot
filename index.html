@@ -90,7 +90,7 @@
     <div class="container">
         <h1>Анкета пользователя</h1>
         <p>(FlexBot)</p>
-        <form>
+        <form id="user-form">
             <div class="form-group name">
                 <label for="name">Имя:</label>
                 <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
@@ -152,5 +152,25 @@
             <button type="submit">Отправить</button>
         </form>
     </div>
+    <script>
+        document.getElementById('user-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            fetch('/submit-form', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Закрыть веб-приложение после отправки данных
+                window.WebApp.close();
+            })
+            .catch(error => {
+                alert('Произошла ошибка при отправке данных.');
+                console.error(error);
+            });
+        });
+    </script>
 </body>
 </html>
