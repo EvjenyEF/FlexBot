@@ -150,27 +150,27 @@
             </div>
 
             <button type="submit" id="submit-button">Отправить</button>
-        </form>
+    </form>
     </div>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp;
         window.Telegram.WebApp.ready();
-
-        // Расширяем приложение на всю ширину и высоту экрана
         tg.expand();
-
         // Получаем имя пользователя из tg.initDataUnsafe.firstname
-        const nameInput = document.getElementById('name').value = tg.initDataUnsafe.user.firstname;
-
+        const usernameInput = document.getElementById('username');
+        usernameInput.value = tg.initDataUnsafe.user.firstname;
 
         const form = document.getElementById('user-form');
         const submitButton = document.getElementById('submit-button');
-
         form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            // Собираем данные формы
+            const formData = new FormData(form);
+            // Отправляем данные в телеграм бот
+            tg.sendFormData(formData);
             tg.close();
-
         });
     </script>
 </body>
