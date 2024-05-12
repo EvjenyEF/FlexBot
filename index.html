@@ -161,10 +161,8 @@
         const form = document.getElementById('user-form');
         const submitButton = document.getElementById('submit-button');
 
-        // Добавляем обработчик события submit на форму
-        form.addEventListener('submit', (event) => {
-            event.preventDefault(); // Остановим стандартное поведение формы
-
+        // Обработчик события клика на кнопку "Отправить"
+        submitButton.addEventListener('click', () => {
             // Проверяем, что все поля формы заполнены
             if (form.checkValidity()) {
                 // Собираем данные формы
@@ -172,10 +170,18 @@
 
                 // Отправляем данные в телеграм бот
                 tg.sendFormData(formData);
-                tg.close();
+                tg.closeWebApp(); // Закрываем веб-приложение
             } else {
                 // Если форма заполнена некорректно, выводим сообщение об ошибке
                 alert('Пожалуйста, заполните все обязательные поля.');
+            }
+        });
+
+        // Обработчик события клика на документ
+        document.addEventListener('click', () => {
+            // Если клавиатура открыта, сворачиваем ее
+            if (tg.isExpanded) {
+                tg.close();
             }
         });
     </script>
