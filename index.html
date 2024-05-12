@@ -156,7 +156,6 @@
     <script>
         let tg = window.Telegram.WebApp;
         let tosend = document.getElementById('submit-button');
-        document.getElementById('name').value = tg.initDataUnsafe.user.first_name + '' + tg.initDataUnsafe.user.last_name;
         tosend.addEventListener('click', () => {
             tg.close()
         });
