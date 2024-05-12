@@ -155,9 +155,28 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp;
-        let tosend = document.getElementById('submit-button');
-        tosend.addEventListener('click', () => {
-            tg.close()
+        window.Telegram.WebApp.ready();
+        tg.expand();
+
+        const form = document.getElementById('user-form');
+        const submitButton = document.getElementById('submit-button');
+
+        // Добавляем обработчик события submit на форму
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Остановим стандартное поведение формы
+
+            // Проверяем, что все поля формы заполнены
+            if (form.checkValidity()) {
+                // Собираем данные формы
+                const formData = new FormData(form);
+
+                // Отправляем данные в телеграм бот
+                tg.sendFormData(formData);
+                tg.close();
+            } else {
+                // Если форма заполнена некорректно, выводим сообщение об ошибке
+                alert('Пожалуйста, заполните все обязательные поля.');
+            }
         });
     </script>
 </body>
