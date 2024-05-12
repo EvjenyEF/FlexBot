@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +7,15 @@
     <style>
         body {
             font-family: 'Google Sans', Arial, sans-serif;
-            background-color: #121212; /* Черный */
-            color: #FFFFFF; /* Белый текст */
+            background-color: var(--tg-theme-text-color); /* Черный */
+            color: var(--tg-theme-text-color); /* Белый текст */
             padding: 20px;
         }
 
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background-color: #1F1F1F; /* Темно-серый */
+            background-color: var(--tg-theme-text-color); /* Темно-серый */
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
@@ -71,8 +71,8 @@
         }
 
         button {
-            background-color: #C0C0C0; /* Серебристый */
-            color: #121212; /* Черный */
+            background-color: var(--tg-theme-text-color); /* Серебристый */
+            color: var(--tg-theme-text-color); /* Черный */
             padding: 14px 20px;
             border: none;
             border-radius: 4px;
@@ -82,7 +82,7 @@
         }
 
         button:hover {
-            background-color: #A0A0A0; /* Более темный серебристый */
+            background-color: var(--tg-theme-text-color); /* Более темный серебристый */
         }
     </style>
 </head>
@@ -158,9 +158,10 @@
         let tg = window.Telegram.WebApp;
         window.Telegram.WebApp.ready();
         tg.expand();
+
         // Получаем имя пользователя из tg.initDataUnsafe.user.first_name
-        const usernameInput = document.getElementById('username');
-        usernameInput.value = tg.initDataUnsafe.user.first_name;
+        const nameInput = document.getElementById('name');
+        nameInput.value = tg.initDataUnsafe.user.first_name;
 
         const form = document.getElementById('user-form');
         const submitButton = document.getElementById('submit-button');
