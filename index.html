@@ -151,25 +151,14 @@
             <button type="submit" id="submit-button">Отправить</button>
         </form>
     </div>
+
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        function validateForm() {
-            // Здесь можно добавить проверки данных формы перед отправкой
-            return true; // Вернуть true, если данные прошли проверку, иначе false
-        }
-
-        document.getElementById('user-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Предотвращаем отправку формы по умолчанию
-
-            let tg = window.Telegram.WebApp;
-            if (tg) {
-                let firstName = tg.initData.user.first_name || '';
-                let lastName = tg.initData.user.last_name || '';
-                document.getElementById('name').value = firstName + ' ' + lastName;
-                tg.close();
-            } else {
-                alert('Не удалось получить доступ к Telegram API');
-            }
+        let tg = window.Telegram.WebApp;
+        let tosend = document.getElementById('submit-button');
+        document.getElementById('name').value = tg.initDataUnsafe.user.first_name + '' + tg.initDataUnsafe.user.last_name;
+        tosend.addEventListener('click', () => {
+            tg.close()
         });
     </script>
 </body>
